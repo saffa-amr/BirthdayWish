@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Countdown</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #f0f8ff;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        #timer {
+            font-size: 2rem;
+            margin: 20px 0;
+        }
+        #message {
+            font-size: 1.5rem;
+            color: #ff5722;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Countdown to the Special Day!</h1>
+    <div id="timer">Loading...</div>
+    <div id="message" style="display:none;">
+        আজকেরই এই দিনে<br>
+        সবকিছু হউক নতুন করে,<br>
+        সুখের স্মৃতিটুক থাক কাছে<br>
+        দু:খগুলো যাক দুরে।<br>
+        জড়া জীর্ণ অতীতটাকে<br>
+        রেখোনা আর মনে<br>
+        নব উদ্দমে কাজ করো<br>
+        নতুন এই দিনে।<br>
+        <strong>শুভ জন্মদিন, প্রিয়!</strong>
+    </div>
+    <script>
+        function startCountdown() {
+            const targetDate = new Date("November 30, 2024 00:00:00").getTime();
+            const timerElement = document.getElementById("timer");
+            const messageElement = document.getElementById("message");
+
+            function updateTimer() {
+                const now = new Date().getTime();
+                const timeLeft = targetDate - now;
+
+                if (timeLeft <= 0) {
+                    timerElement.style.display = "none";
+                    messageElement.style.display = "block";
+                    clearInterval(timerInterval);
+                    return;
+                }
+
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                timerElement.innerHTML = `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+            }
+
+            const timerInterval = setInterval(updateTimer, 1000);
+            updateTimer();
+        }
+
+        startCountdown();
+    </script>
+</body>
+</html>
